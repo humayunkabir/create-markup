@@ -24,7 +24,7 @@ function parseArgumentIntoOptions(rawArgs) {
   );
   return {
     name: args._[0],
-    skipPrompts: args['--yes'] || true,
+    skipPrompts: args['--yes'],
     git: args['--git'],
     template: args.template,
     templatingEngine: args.templatingEngine,
@@ -34,23 +34,23 @@ function parseArgumentIntoOptions(rawArgs) {
 }
 
 async function promptForMissingOptions(options) {
-  // const { skipPrompts } = await inquirer.prompt([
-  //   {
-  //     type: 'list',
-  //     name: 'skipPrompts',
-  //     message: 'Setup:',
-  //     choices: [
-  //       {
-  //         name: 'Default',
-  //         value: true,
-  //       },
-  //       {
-  //         name: 'Custom',
-  //         value: false,
-  //       },
-  //     ],
-  //   },
-  // ]);
+  const { skipPrompts } = await inquirer.prompt([
+    {
+      type: 'list',
+      name: 'skipPrompts',
+      message: 'Setup:',
+      choices: [
+        {
+          name: 'Default',
+          value: true,
+        },
+        {
+          name: 'Custom',
+          value: false,
+        },
+      ],
+    },
+  ]);
 
   if (options.skipPrompts || skipPrompts) {
     return {
