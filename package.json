@@ -1,0 +1,30 @@
+{
+  "name": "@humayunkabir/create-markup",
+  "version": "0.1.0",
+  "description": "A CLI to bootstrap markup(front-end) project",
+  "main": "src/index.js",
+  "bin": {
+    "@humayunkabir/create-markup": "bin/create-markup",
+    "create-markup": "bin/create-markup"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "cli",
+    "create-markup"
+  ],
+  "repository": "https://github.com/humayunkabir/create-markup.git",
+  "author": "Humayun Kabir <humayunkabir.cep@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "arg": "^5.0.0",
+    "chalk": "^4.1.2",
+    "esm": "^3.2.25",
+    "execa": "^5.1.1",
+    "inquirer": "^8.1.2",
+    "listr": "^0.14.3",
+    "ncp": "^2.0.0",
+    "pkg-install": "^1.0.0"
+  }
+}
