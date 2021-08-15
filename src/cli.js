@@ -26,9 +26,9 @@ function parseArgumentIntoOptions(rawArgs) {
     name: args._[0],
     skipPrompts: args['--yes'],
     git: args['--git'],
-    template: args.template,
-    templatingEngine: args.templatingEngine,
-    packageManager: args.packageManager,
+    template: args['--template'],
+    templatingEngine: args['--templatingEngine'],
+    packageManager: args['--packageManager'],
     install: args['--install'],
   };
 }
