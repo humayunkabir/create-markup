@@ -34,16 +34,40 @@ function parseArgumentIntoOptions(rawArgs) {
 }
 
 async function promptForMissingOptions(options) {
+  const defaultOptions = {
+    ...options,
+    name: options.name || 'markup',
+    git: true,
+    template: 'JS',
+    templatingEngine: 'Pug',
+    packageManager: 'npm',
+    install: true,
+  };
+
   if (options.skipPrompts) {
-    return {
-      ...options,
-      name: options.name || 'markup',
-      git: true,
-      template: 'JS',
-      templatingEngine: 'Pug',
-      packageManager: 'npm',
-      install: true,
-    };
+    return defaultOptions;
+  }
+
+  const { skipPrompts } = await inquirer.prompt([
+    {
+      type: 'list',
+      name: 'skipPrompts',
+      message: 'Setup:',
+      choices: [
+        {
+          name: 'Default',
+          value: true,
+        },
+        {
+          name: 'Custom',
+          value: false,
+        },
+      ],
+    },
+  ]);
+
+  if (skipPrompts) {
+    return defaultOptions;
   }
 
   const questions = [];

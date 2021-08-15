@@ -38,8 +38,42 @@ export async function createProject(options) {
 
   options.sourceDir = sourceDir;
 
+  options.sourceDirs = [
+    {
+      source: `${sourceDir}/src/${options.templatingEngine.toLowerCase()}`,
+      target: options.targetDir + '/src',
+    },
+    {
+      source: `${sourceDir}/src/assets/${options.template.toLowerCase()}`,
+      target: options.targetDir + '/src/assets',
+    },
+    {
+      source: `${sourceDir}/src/assets/css`,
+      target: options.targetDir + '/src/assets',
+    },
+    {
+      source: `${sourceDir}/src/assets/font`,
+      target: options.targetDir + '/src/assets',
+    },
+    {
+      source: `${sourceDir}/src/assets/img`,
+      target: options.targetDir + '/src/assets',
+    },
+    {
+      source: `${sourceDir}/src/assets/scss`,
+      target: options.targetDir + '/src/assets',
+    },
+    {
+      source: `${sourceDir}/src/assets/video`,
+      target: options.targetDir + '/src/assets',
+    },
+  ];
+
   try {
     await access(sourceDir, fs.constants.R_OK);
+    // options.sourceDirs.forEach(async (dir) => {
+    //   await access(dir.source, fs.constants.R_OK);
+    // });
   } catch (err) {
     console.error('%s Invalid template name', chalk.red.bold('ERROR'));
     process.exit(1);
@@ -55,6 +89,9 @@ export async function createProject(options) {
           source: options.sourceDir,
           target: options.targetDir,
         });
+        // options.sourceDirs.forEach(async (options) => {
+        //   await copyTemplateFiles(options);
+        // });
       },
     },
     {
@@ -85,7 +122,11 @@ export async function createProject(options) {
 
   console.log('%s Markup Ready', chalk.green.bold('DONE'));
 
-  console.log(chalk.yellow.bold(`\ncd ${options.name}\n`));
+  console.log(
+    chalk.yellow.bold(
+      `\ncd ${options.name} && ${options.packageManager} start\n`
+    )
+  );
 
   return true;
 }
