@@ -34,25 +34,7 @@ function parseArgumentIntoOptions(rawArgs) {
 }
 
 async function promptForMissingOptions(options) {
-  // const { skipPrompts } = await inquirer.prompt([
-  //   {
-  //     type: 'list',
-  //     name: 'skipPrompts',
-  //     message: 'Setup:',
-  //     choices: [
-  //       {
-  //         name: 'Default',
-  //         value: true,
-  //       },
-  //       {
-  //         name: 'Custom',
-  //         value: false,
-  //       },
-  //     ],
-  //   },
-  // ]);
-
-  if (options.skipPrompts || skipPrompts) {
+  if (options.skipPrompts) {
     return {
       ...options,
       name: options.name || 'markup',

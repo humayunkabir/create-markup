@@ -1,0 +1,6 @@
+:root{
+  --body-bg: #fafafa;
+}
+body {
+  background-color: var(--body-bg);
+}
