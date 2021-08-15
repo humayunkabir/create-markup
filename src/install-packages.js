@@ -23,7 +23,7 @@ const installPackages = async (packages, options) => {
   const { stdout } = await install(packages, {
     dev: false,
     cwd: options.targetDir,
-    prefer: options.packageManager,
+    prefer: 'npm' || options.packageManager,
     ...options,
   });
 
