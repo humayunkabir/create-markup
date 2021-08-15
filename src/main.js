@@ -70,10 +70,10 @@ export async function createProject(options) {
   ];
 
   try {
-    // await access(sourceDir, fs.constants.R_OK);
-    options.sourceDirs.forEach(async (dir) => {
-      await access(dir.source, fs.constants.R_OK);
-    });
+    await access(sourceDir, fs.constants.R_OK);
+    // options.sourceDirs.forEach(async (dir) => {
+    //   await access(dir.source, fs.constants.R_OK);
+    // });
   } catch (err) {
     console.error('%s Invalid template name', chalk.red.bold('ERROR'));
     process.exit(1);
@@ -85,13 +85,13 @@ export async function createProject(options) {
     {
       title: 'Copying template files',
       task: async () => {
-        // await copyTemplateFiles({
-        //   source: options.sourceDir,
-        //   target: options.targetDir,
-        // });
-        options.sourceDirs.forEach(async (options) => {
-          await copyTemplateFiles(options);
+        await copyTemplateFiles({
+          source: options.sourceDir,
+          target: options.targetDir,
         });
+        // options.sourceDirs.forEach(async (options) => {
+        //   await copyTemplateFiles(options);
+        // });
       },
     },
     {

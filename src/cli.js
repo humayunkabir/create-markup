@@ -34,6 +34,20 @@ function parseArgumentIntoOptions(rawArgs) {
 }
 
 async function promptForMissingOptions(options) {
+  const defaultOptions = {
+    ...options,
+    name: options.name || 'markup',
+    git: true,
+    template: 'JS',
+    templatingEngine: 'Pug',
+    packageManager: 'npm',
+    install: true,
+  };
+
+  if (options.skipPrompts) {
+    return defaultOptions;
+  }
+
   const { skipPrompts } = await inquirer.prompt([
     {
       type: 'list',
@@ -52,16 +66,8 @@ async function promptForMissingOptions(options) {
     },
   ]);
 
-  if (options.skipPrompts || skipPrompts) {
-    return {
-      ...options,
-      name: options.name || 'markup',
-      git: true,
-      template: 'JS',
-      templatingEngine: 'Pug',
-      packageManager: 'npm',
-      install: true,
-    };
+  if (skipPrompts) {
+    return defaultOptions;
   }
 
   const questions = [];
