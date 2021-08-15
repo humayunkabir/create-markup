@@ -1,6 +1,6 @@
 {
   "name": "@humayunkabir/create-markup",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A CLI to bootstrap markup(front-end) project",
   "main": "src/index.js",
   "bin": {
