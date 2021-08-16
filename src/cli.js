@@ -1,6 +1,7 @@
 import arg from 'arg';
 import inquirer from 'inquirer';
 import { createProject } from './main';
+import getQuestion from './questions';
 
 function parseArgumentIntoOptions(rawArgs) {
   const args = arg(
@@ -10,13 +11,17 @@ function parseArgumentIntoOptions(rawArgs) {
       '--install': Boolean,
       '--template': String,
       '--templatingEngine': String,
+      '--cssFramework': String,
       '--packageManager': String,
+      '--bundler': String,
       '-g': '--git',
       '-y': '--yes',
       '-i': '--install',
       '-t': '--template',
       '-e': '--templatingEngine',
+      '-cf': '--cssFramework',
       '-p': '--packageManager',
+      '-b': '--bundler',
     },
     {
       argv: rawArgs.slice(2),
@@ -26,113 +31,54 @@ function parseArgumentIntoOptions(rawArgs) {
     name: args._[0],
     skipPrompts: args['--yes'],
     git: args['--git'],
-    template: args['--template'],
     templatingEngine: args['--templatingEngine'],
+    cssFramework: args['--cssFramework'],
+    style: args['--style'],
+    script: args['--script'],
     packageManager: args['--packageManager'],
-    install: args['--install'],
+    install: args['--install'] || true,
+    bundler: args['--bundler'],
   };
 }
 
 async function promptForMissingOptions(options) {
   const defaultOptions = {
-    ...options,
     name: options.name || 'markup',
     git: true,
-    template: 'JS',
+    script: 'JS',
+    style: 'SCSS',
     templatingEngine: 'Pug',
+    cssFramework: 'Bootstrap',
     packageManager: 'npm',
     install: true,
+    bundler: 'Gulp',
   };
 
   if (options.skipPrompts) {
     return defaultOptions;
   }
 
-  const { skipPrompts } = await inquirer.prompt([
-    {
-      type: 'list',
-      name: 'skipPrompts',
-      message: 'Setup:',
-      choices: [
-        {
-          name: 'Default',
-          value: true,
-        },
-        {
-          name: 'Custom',
-          value: false,
-        },
-      ],
-    },
-  ]);
+  const { skipPrompts } = await inquirer.prompt(getQuestion('skipPrompts'));
 
   if (skipPrompts) {
     return defaultOptions;
   }
 
-  const questions = [];
-
-  if (!options.name) {
-    questions.push({
-      name: 'name',
-      message: 'What is your project name?',
-      default: 'markup',
-    });
-  }
-
-  if (!options.template) {
-    questions.push({
-      type: 'list',
-      name: 'template',
-      message: 'Which template would you like to use?',
-      choices: [
-        {
-          name: 'JavaScript',
-          value: 'JS',
-        },
-        {
-          name: 'TypeScript',
-          value: 'TS',
-        },
-      ],
-    });
-  }
-
-  if (!options.templatingEngine) {
-    questions.push({
-      type: 'list',
-      name: 'templatingEngine',
-      message: 'Which templating engine would you like to use?',
-      choices: ['Pug', 'HTML'],
-    });
-  }
-
-  if (!options.packageManager) {
-    questions.push({
-      type: 'list',
-      name: 'packageManager',
-      message: 'What is your Package Manager?',
-      choices: ['npm', 'yarn'],
-    });
-  }
-
-  if (!options.git) {
-    questions.push({
-      type: 'confirm',
-      name: 'git',
-      message: 'Would you like to use Git?',
-    });
-  }
-
-  if (!options.install) {
-    questions.push({
-      type: 'confirm',
-      name: 'install',
-      message: 'Would you like to install packages?',
-    });
-  }
-
-  const answers = await inquirer.prompt(questions);
+  const answers = await inquirer.prompt(
+    [
+      'name',
+      'script',
+      'templatingEngine',
+      'bundler',
+      'cssFramework',
+      'style',
+      'packageManager',
+      'git',
+      'install',
+    ]
+      .map((name) => !options[name] && getQuestion(name))
+      .filter((question) => question)
+  );
 
   return {
     ...options,
