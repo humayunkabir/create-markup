@@ -1,0 +1,49 @@
+{
+  "rtl": true,
+  "dir": {
+    "dev": "public",
+    "prod": "build"
+  },
+  "style": {
+    "src": "src/scss/**/*.scss",
+    "dest": "css"
+  },
+  "script": {
+    "src": [
+      "src/js/index.js"
+    ],
+    "dest": "js"
+  },
+  "pug": {
+    "base": "src",
+    "src": {
+      "all": "src/**/*.pug",
+      "pages": [
+        "*.pug"
+      ]
+    },
+    "dest": ""
+  },
+  "product": {
+    "paths": [
+      "tasks/**/*.*",
+      "public/**/*.*",
+      "src/**/*.*",
+      ".babelrc",
+      ".eslintrc",
+      ".gitignore",
+      ".prettierignore",
+      "gulpfile.js",
+      "package-lock.json",
+      "package.json",
+      "README.md",
+      "vendors.json"
+    ]
+  },
+  "watch": [
+    "assets/img",
+    "assets/data",
+    "assets/video",
+    "vendors"
+  ]
+}
