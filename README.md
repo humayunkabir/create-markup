@@ -18,17 +18,22 @@ create-markup comes with the following options:
   
   Available options: 
   - JavaScript (default)
-  - TypeScript
 - **-e, --templatingEngine**: `--e <name>, -e=<name>, --templatingEngine <name> or --templatingEngine=<name>`
   
   Available options: 
   - Pug (default)
-  - HTML
+- **-cf, --cssFramework**: `--cf <name>, -cf=<name>, --cssFramework <name> or --cssFramework=<name>`
+  
+  Available options: 
+  - Bootstrap (default)
 - **-p, --packageManager**: `--p <name>, -p=<name>, --packageManager <name> or --packageManager=<name>`
   
   Available options: 
   - npm (default)
-  - yarn
+- **-b, --bundler**: `--b <name>, -b=<name>, --bundler <name> or --bundler=<name>`
+  
+  Available options: 
+  - Gulp (default)
 
 ## Why use Create Markup?
 create-markup allows you to create a new project within seconds. It is officially maintained by the  [Humayun Kabir](https://github.com/humayunkabir), and includes a couple of benefits:

@@ -34,7 +34,7 @@ export const questions = [
     type: 'list',
     name: 'templatingEngine',
     message: 'Which templating engine would you like to use?',
-    choices: ['Pug', 'HTML'],
+    choices: ['Pug'],
   },
   {
     type: 'list',
