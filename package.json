@@ -1,6 +1,6 @@
 {
   "name": "@humayunkabir/create-markup",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A CLI to bootstrap markup(front-end) project",
   "main": "src/index.js",
   "bin": {
@@ -18,6 +18,7 @@
   "author": "Humayun Kabir <humayunkabir.cep@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "@types/inquirer": "^7.3.3",
     "arg": "^5.0.0",
     "chalk": "^4.1.2",
     "esm": "^3.2.25",
@@ -26,8 +27,5 @@
     "listr": "^0.14.3",
     "ncp": "^2.0.0",
     "pkg-install": "^1.0.0"
-  },
-  "dependencies": {
-    "@types/inquirer": "^7.3.3"
   }
 }
